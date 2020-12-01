@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <h1>Starting with Whiteboard</h1> -->
+    <!-- canvas  -->
+    <!-- drawing Board -->
+    <!-- width=> 300px, height=150px -->
+    <canvas class="board"></canvas>
+    <!-- object  -->
+    <script>
+        //    alert("Js Ran");
+        //    window=> represents current tab 
+        // document => represents current tab html
+        let canvas = document.querySelector(".board");
+        // increase the size of canvas
+        canvas.height = window.innerHeight;
+        canvas.width = window.innerWidth;
+        //    get browser tool => draw
+        // 2d ,3d,webgl 
+        let tool = canvas.getContext("2d");
+        //   default  color-> black
+        // sr=> 0,sy=>0, width-> 100,height-> 100
+        // *************Draw Rect**************
+        // tool.fillStyle="blue";
+        // tool.fillRect(0,0,100,100);
+        // tool.fillStyle="green";
+        // tool.fillRect(100,100,100,100);
+        // tool.strokeStyle="orange";
+        // tool.lineWidth=10;
+        // tool.strokeRect(100,100,100,100);
+        // stroke => draw outline
+        // /fill -> fill the area
+        // drawImage, arc,
+        // ***********draw line*******
+        // start drawing
+        // tool.beginPath();
+        // // // move to 20,20
+        // tool.moveTo(20,20);
+        // tool.lineTo(100,100);
+        // // tool.lineTo(200,100);
+        // // tool.lineTo(20,20);
+        // // tool.strokeStyle="blue";
+        // // tool.lineWidth=10;
+        // tool.stroke();
+        // tool.fill();
+        let initialMouseX = null;
+        let initialMouseY = null;
+        let isMouseDown = false;
+        tool.strokeStyle="blue";
+        // isMouse Down=>
+        // path draw start 
+        window.addEventListener("mousedown", function onmouseDown(obj) {
+            initialMouseX = obj.clientX;
+            initialMouseY = obj.clientY;
+            isMouseDown = true;
+            // console.log("mouse down fired");
+            tool.beginPath();
+            tool.moveTo(initialMouseX, initialMouseY);
+        });  
+        // actual draw
+        window.addEventListener("mousemove", function (e) {
+            let finalMouseX = e.clientX;
+            let finalMouseY = e.clientY;
+            if (isMouseDown == true) {
+                // user has pressed the key and then he is moving
+                tool.lineTo(finalMouseX, finalMouseY);
+                tool.stroke();
+            }
+        })
+        window.addEventListener("mouseup", function (obj) {
+            isMouseDown=false;
+        })
+
+
+    </script>
+</body>
+
+</html>
